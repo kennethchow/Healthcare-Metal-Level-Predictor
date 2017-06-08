@@ -1,0 +1,120 @@
+
+{% extends 'base.html' %}
+
+{% block body %}
+  <section class="header">
+    <h2 class="title">A Tool to Predict Metal Level of Health Insurance Plan</h2>
+  </section>
+  <hr>
+  <h4><b>Overview</b></h4>
+  <p>Below are parameters which create a hypothetical health insurance plan, customise to your insurance needs and a recommendation for which metal level of a plan is presented.</p>
+  <hr>
+
+  <div class="container">
+    <form method="POST">
+      {{ form.hidden_tag() }}
+      <div class="row">
+        <div class="col-sm-3">{{ form.First_Tier_Utilization.label }} {{ form.First_Tier_Utilization() }}</div>
+      </div>
+      <hr>
+      <h5>Conditions Covered By Plan:</h5>
+      <br>
+      <div class="row">
+        <div class="col-sm-4">{{ form.Weight_Loss_Programs.label }} {{ form.Weight_Loss_Programs() }}</div>
+        <div class="col-sm-4">{{ form.Heart_Disease.label }} {{ form.Heart_Disease() }}</div>
+        <div class="col-sm-4">{{ form.Pain_Management.label }} {{ form.Pain_Management() }}</div>    
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-sm-4">{{ form.Depression.label }} {{ form.Depression() }}</div>
+        <div class="col-sm-4">{{ form.High_BP_Chol.label }} {{ form.High_BP_Chol() }}</div>
+        <div class="col-sm-4">{{ form.Low_Back_Pain.label }} {{ form.Low_Back_Pain() }}</div> 
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-sm-4">{{ form.Diabetes.label }} {{ form.Diabetes() }}</div>
+        <div class="col-sm-4">{{ form.Pregnancy.label }} {{ form.Pregnancy() }}</div>
+        <div class="col-sm-4">{{ form.Asthma.label }} {{ form.Asthma() }}</div> 
+      </div> 
+      <hr>
+      <h5>Drug Deductibles Integrated?</h5>
+      <br>
+      <div class="row">
+        <div class="col-sm-3">{{ form.DDIntYes.label }} {{ form.DDIntYes() }}</div>
+        <div class="col-sm-3">{{ form.DDIntNo.label }} {{ form.DDIntNo() }}</div>
+      </div>
+      <hr>
+      <h5>Maximum Out Of Pocket (MOOP) Limit Integrated?</h5>
+      <br>
+      <div class="row">  
+        <div class="col-sm-3">{{ form.MOOPIntYes.label }} {{ form.MOOPIntYes() }}</div>
+        <div class="col-sm-3">{{ form.MOOPIntNo.label }} {{ form.MOOPIntNo() }}</div>
+      </div>
+      <hr>
+      <h5>Plan Type:</h5>
+      <br>
+      <div class="row">
+        <div class="col-sm-3">{{ form.EPO.label }} {{ form.EPO() }}</div>
+        <div class="col-sm-3">{{ form.HMO.label }} {{ form.HMO() }}</div>
+        <div class="col-sm-3">{{ form.POS.label }} {{ form.POS() }}</div>
+        <div class="col-sm-3">{{ form.PPO.label }} {{ form.PPO() }}</div>
+      </div>  
+      <hr>
+      <h5>Health Savings Account (HSA) Eligible?</h5>
+      <br>
+      <div class="row">
+        <div class="col-sm-3">{{ form.HSAEliYes.label }} {{ form.HSAEliYes() }}</div>
+        <div class="col-sm-3">{{ form.HSAEliNo.label }} {{ form.HSAEliNo() }}</div>
+      </div>  
+      <hr>
+      <h5>New Plan?</h5>
+      <br>
+      <div class="row">
+        <div class="col-sm-3">{{ form.NewPlan.label }} {{ form.NewPlan() }}</div>
+        <div class="col-sm-3">{{ form.ExistingPlan.label }} {{ form.ExistingPlan() }}</div>
+      </div>
+      <hr>
+      <h5>Market Coverage:</h5>
+      <br>
+      <div class="row">
+        <div class="col-sm-3">{{ form.MCInd.label }} {{ form.MCInd() }}</div>
+        <div class="col-sm-3">{{ form.MCShop.label }} {{ form.MCShop() }}</div>
+      </div>
+      <hr>
+      <h5>Is Notice Required for Pregnancy Coverage?</h5>
+      <br>
+      <div class="row">
+        <div class="col-sm-3">{{ form.PregNo.label }} {{ form.PregNo() }}</div>
+        <div class="col-sm-3">{{ form.PregYes.label }} {{ form.PregYes() }}</div>
+      </div>
+      <hr>
+      <h5>Is Referral Required for Specialist Treatment?</h5>  
+      <br>
+      <div class="row">
+        <div class="col-sm-3">{{ form.SpecNo.label }} {{ form.SpecNo() }}</div>
+        <div class="col-sm-3">{{ form.SpecYes.label }} {{ form.SpecYes() }}</div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-sm-3">
+        <button type="submit" id="submit" class="btn btn-primary btn-md" class="btn btn-success">Submit</button>
+        </div>     
+      </div>
+      <br>
+    </form>
+<hr />    
+    {% if prediction %}
+      <div class="container">
+      <div class="row">
+        <div class="col">
+          <h3> Your insurance plan looks like a {{ prediction }} level plan</h3>
+          <img src="{{url_for('static', filename='images/metallevels_' + prediction + '.png')}}"/>
+        </div>
+        <!-- <div class="six columns">
+          Your Chart or any other form of visualizations
+         <div id="chart"></div> -->
+      </div>
+      </div>
+    {% endif %}
+  </div>
+{% endblock body %}
